@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0 OR MIT
 //
-// Copyright (c) 2018-2019 by the author(s)
+// Copyright (c) 2018-2020 by the author(s)
 //
 // Author(s):
 //   - Andre Richter <andre.o.richter@gmail.com>
@@ -15,7 +15,7 @@ macro_rules! __read_raw {
                 () => {
                     let reg;
                     unsafe {
-                        asm!(concat!($asm_instr, " $0, ", $asm_reg_name) : "=r"(reg) ::: "volatile");
+                        llvm_asm!(concat!($asm_instr, " $0, ", $asm_reg_name) : "=r"(reg) ::: "volatile");
                     }
                     reg
                 }
@@ -37,7 +37,7 @@ macro_rules! __write_raw {
                 #[cfg(target_arch = "aarch64")]
                 () => {
                     unsafe {
-                        asm!(concat!($asm_instr, " ", $asm_reg_name, ", $0") :: "r"(value) :: "volatile")
+                        llvm_asm!(concat!($asm_instr, " ", $asm_reg_name, ", $0") :: "r"(value) :: "volatile")
                     }
                 }
 

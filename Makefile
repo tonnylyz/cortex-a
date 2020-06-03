@@ -1,10 +1,13 @@
 TARGET := aarch64-unknown-none-softfloat
 
 default:
-	cargo xbuild --target $(TARGET)
+	cargo build --target $(TARGET)
 
 clippy:
-	cargo xclippy --target $(TARGET)
+	cargo clippy --target $(TARGET)
+
+check:
+	cargo check --target $(TARGET)
 
 fmt:
 	cargo fmt
